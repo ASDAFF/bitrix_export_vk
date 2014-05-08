@@ -26,11 +26,11 @@ $tabControl->Begin();
 		<td><a href="https://vk.com/editapp?act=create" target="_blank">https://vk.com/editapp?act=create</a></td>
 	</tr>
 	<tr>
-		<td width="40%" title="client_id">Идентификатор приложения:</td>
+		<td width="40%" title="client_id">ID приложения:</td>
 		<td><input type="text" name="options[client_id]" value="<?= $arResult['OPTIONS']['client_id'] ?>" size="40"/></td>
 	</tr>
 	<tr>
-		<td width="40%" title="client_secret">Секретный ключ приложения:</td>
+		<td width="40%" title="client_secret">Защищенный ключ:</td>
 		<td><input type="text" name="options[client_secret]" value="<?= $arResult['OPTIONS']['client_secret'] ?>" size="40"/></td>
 	</tr>
 	<tr>
@@ -65,7 +65,7 @@ $tabControl->Begin();
 	<? $tabControl->BeginNextTab(); ?>
 		<tr>
 			<td width="40%" title="iblock_id">Инфоблок торгового каталога:</td>
-			<td><input type="text" name="options[iblock_id]" value="<?= $arResult['OPTIONS']['iblock_id'] ?>" size="40"/></td>
+			<td><?echo GetIBlockDropDownList($arResult['OPTIONS']['iblock_id'], 'options[iblock_type_id]', 'options[iblock_id]', false, 'class="adm-detail-iblock-types"', 'class="adm-detail-iblock-list"');?></td>
 		</tr>
 	<? $tabControl->Buttons(); ?>
 	<input type="submit" name="save" value="Сохранить" title="Сохранить и вернуться" class="adm-btn-save">

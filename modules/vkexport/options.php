@@ -1,5 +1,8 @@
 <?
 
+if (!CModule::IncludeModule('iblock')) {
+	die('Модуль iblock не установлен');
+}
 if (!CModule::IncludeModule('vkexport')) {
 	die('Модуль vkexport не установлен');
 }
