@@ -1,25 +1,42 @@
 <?
+
 if (!CModule::IncludeModule('vkexport')) {
 	die('Модуль vkexport не установлен');
 }
 
-$aTabs = array(
-	array(
-		"DIV"   => "tab1",
-		"TAB"   => 'Настройки',
-		"TITLE" => 'Экспорт товаров',
-	),
-);
-$tabControl = new CAdminTabControl("tabControl", $aTabs);
-$tabControl->Begin();
-?>
-<form method="post"
-      action="<? echo $APPLICATION->GetCurPage() ?>?mid=<?= htmlspecialcharsbx($mid) ?>&lang=<?= LANGUAGE_ID ?>">
-	<?= bitrix_sessid_post() ?>
-	<? $tabControl->BeginNextTab(); ?>
-	222
-	<? $tabControl->Buttons(); ?>
-	<input type="submit" name="save" value="Сохранить" title="Сохранить и вернуться" class="adm-btn-save">
-	<? $tabControl->End(); ?>
+$arResult['REDIRECT_URL'] = 'http://'.$_SERVER['SERVER_NAME'].'/bitrix/admin/settings.php?mid=vkexport&lang=ru';
 
-</form>
+$options = array(
+	'client_id',
+	'client_secret',
+	'group_id',
+	'access_token',
+);
+
+foreach ($options as $option_name) {
+	$arResult['OPTIONS'][$option_name] = COption::GetOptionString('vkexport', $option_name);
+}
+
+if (!empty($_REQUEST['code'])) {
+	$uri = array(
+		'client_id'		 => $arResult['OPTIONS']['client_id'],
+		'client_secret'	 => $arResult['OPTIONS']['client_secret'],
+		'redirect_uri'	 => $arResult['REDIRECT_URL'],
+		'code'			 => $_REQUEST['code'],
+	);
+	$request = "https://oauth.vk.com/access_token?" . http_build_query($uri);
+	$result = file_get_contents($request);
+	$result = json_decode($result, true);
+	$_POST['options']['access_token'] = $result['access_token'];
+}
+
+if (!empty($_POST['options'])) {
+	foreach ($_POST['options'] as $option_name => $option_value) {
+		COption::SetOptionString('vkexport', $option_name, $option_value);
+		$arResult['OPTIONS'][$option_name] = $option_value;
+	}
+}
+
+
+
+require 'options_form.php';
