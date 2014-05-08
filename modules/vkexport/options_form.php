@@ -63,9 +63,23 @@ $tabControl->Begin();
 		</tr>
 	<? endif; ?>
 	<? $tabControl->BeginNextTab(); ?>
+		<tr class="heading">
+			<td colspan="2">Выберите инфоблок для выгрузки</td>
+		</tr>
 		<tr>
 			<td width="40%" title="iblock_id">Инфоблок торгового каталога:</td>
 			<td><?echo GetIBlockDropDownList($arResult['OPTIONS']['iblock_id'], 'options[iblock_type_id]', 'options[iblock_id]', false, 'class="adm-detail-iblock-types"', 'class="adm-detail-iblock-list"');?></td>
+		</tr>
+		<tr class="heading">
+			<td colspan="2">Работайте</td>
+		</tr>
+		<tr>
+			<td width="40%" title=""></td>
+			<td><input type="submit" name="action[Init]" value="Инициализировать"/></td>
+		</tr>
+		<tr>
+			<td width="40%" title=""></td>
+			<td><input type="submit" name="action[Run]" value="Запустить 1 цикл"/></td>
 		</tr>
 	<? $tabControl->Buttons(); ?>
 	<input type="submit" name="save" value="Сохранить" title="Сохранить и вернуться" class="adm-btn-save">

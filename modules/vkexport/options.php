@@ -14,8 +14,8 @@ $options = array(
 	'client_secret',
 	'group_id',
 	'access_token',
+	'iblock_id',
 );
-
 foreach ($options as $option_name) {
 	$arResult['OPTIONS'][$option_name] = COption::GetOptionString('vkexport', $option_name);
 }
@@ -38,6 +38,13 @@ if (!empty($_POST['options'])) {
 		COption::SetOptionString('vkexport', $option_name, $option_value);
 		$arResult['OPTIONS'][$option_name] = $option_value;
 	}
+}
+
+if (!empty($_POST['actions']['Init'])) {
+	$arResult['RESULTS']['Init'] = CVkexport::Init();
+}
+if (!empty($_POST['actions']['Run'])) {
+	$arResult['RESULTS']['Run'] = CVkexport::Run();
 }
 
 
