@@ -75,7 +75,7 @@ $tabControl->Begin();
 		</tr>
 		<tr>
 			<td width="40%" title=""></td>
-			<td><input type="submit" name="action[Init]" value="Инициализировать"/></td>
+			<td><input type="submit" name="action[Syns]" value="Инициализировать"/></td>
 		</tr>
 		<tr>
 			<td width="40%" title=""></td>

@@ -40,10 +40,10 @@ if (!empty($_POST['options'])) {
 	}
 }
 
-if (!empty($_POST['actions']['Init'])) {
-	$arResult['RESULTS']['Init'] = CVkexport::Init();
+if (!empty($_POST['action']['Syns'])) {
+	$arResult['RESULTS']['Syns'] = CVkexport::Syns();
 }
-if (!empty($_POST['actions']['Run'])) {
+if (!empty($_POST['action']['Run'])) {
 	$arResult['RESULTS']['Run'] = CVkexport::Run();
 }
 

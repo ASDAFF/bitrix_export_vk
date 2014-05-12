@@ -23,6 +23,8 @@ Class vkexport extends CModule {
 		RegisterModule($this->MODULE_ID);
 		CModule::IncludeModule($this->MODULE_ID);
 		// ...
+		global $DB;
+		$DB->RunSQLBatch($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/".$this->MODULE_ID."/install/db/".strtolower($DB->type)."/install.sql");
 	}
 
 	function DoUninstall() {
